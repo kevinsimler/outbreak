@@ -574,7 +574,10 @@ class App extends Component<Props, State> {
           <b>License</b>
         </div>
         <div>
-          <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — no rights reserved. You're free to use this work however you see fit, including copying it, modifying it, and distributing it on your own site. (I'd appreciate a link back to the original post, though, if you're feeling generous.)
+          <a href="https://creativecommons.org/share-your-work/public-domain/cc0/">CC0</a> — no rights reserved. You're free to use this work however you see fit, including copying it, modifying it, and distributing it on your own site.
+        </div>
+        <div>
+          <a href="https://github.com/kevinsimler/outbreak">Source code</a>
         </div>
         <div>
           <b>Full model</b>
