@@ -593,7 +593,7 @@ class App extends Component<Props, State> {
             <li><a href="https://medium.com/@tomaspueyo/coronavirus-act-today-or-people-will-die-f4d3d9cd99ca">Coronavirus: Why You Must Act Now</a> — Tomas Pueyo explains why we've been systematically underestimating this thing, and why that needs to change. Just read it.</li>
             <li><a href="https://medium.com/@joschabach/flattening-the-curve-is-a-deadly-delusion-eea324fe9727">Don’t "Flatten the Curve," Stop It!</a> — Joscha Bach does some calculations on hospital capacity and concludes that "flattening the curve" won't be enough; we have to completely stop the outbreak.</li>
             <li>The Washington Post's <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">excellent simulation</a> — brilliant use of billiard balls to show transmission and social distancing.</li>
-            <li><a href="https://meltingasphalt.com/interactive/going-critical/">Going Critical</a> — my previous exploration of diffusion and expontential growth processes, including the nuclear reactions and the growth of knowledge.</li>
+            <li><a href="https://meltingasphalt.com/interactive/going-critical/">Going Critical</a> — my previous exploration of diffusion and viral growth processes, including the nuclear reactions and the growth of knowledge.</li>
           </ul>
         </div>
 
