@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <!--<link rel="stylesheet" href="%PUBLIC_URL%/normalize.css">-->
+    <!--<link rel="stylesheet" href="%PUBLIC_URL%/skeleton.css">-->
+
+    <!--- fonts --->
+    <link href='https://fonts.googleapis.com/css?family=Linux+Libertine:400,400i,700,700i|Rosarivo:400,400italic|Roboto:300|Lato:400' rel='stylesheet' type='text/css'>
+
+    <!--- metadata ish --->
+		<link rel="pingback" href="https://meltingasphalt.com/xmlrpc.php"/>
+    <link rel="alternate" type="application/rss+xml" title="Melting Asphalt &raquo; Feed" href="http://feeds.feedburner.com/MeltingAsphalt" />
+
+    <!--- Twitter and Open Graph cards --->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content="Outbreak"/>
+    <meta name="twitter:image" content="https://meltingasphalt.com%PUBLIC_URL%/card.png"/>
+    <meta name="twitter:description" content="A playable disease simulation"/>
+    <meta property="og:url" content="https://meltingasphalt.com%PUBLIC_URL%"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Outbreak"/>
+    <meta property="og:description" content="A playable disease simulation"/>
+    <meta property="og:image" content="https://meltingasphalt.com%PUBLIC_URL%/card.png"/>
+    <meta property="og:image:type" content="image/png"/>
+    <meta property="og:image:width" content="1024"/>
+    <meta property="og:image:height" content="512"/>
+
+    <!--- Google Analytics --->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-31286023-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+    <!--- Mailchimp subscribe form --->
+    <link rel='stylesheet' id='mailchimp-for-wp-form-css'  href='https://meltingasphalt.com/wp-content/plugins/mailchimp-for-wp/assets/css/form.min.css?ver=2.1.6' type='text/css' media='all' />
+
+
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+<!--    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">-->
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Outbreak — Melting Asphalt</title>
+  </head>
+  <body>
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
