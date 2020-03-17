@@ -412,11 +412,11 @@ class App extends Component<Props, State> {
           Enter the <strong>fatality rate</strong>.
         </div>
         <div>
+          In our simulation, fatality rate is the probability that a patient who gets infected will ultimately die of the infection, assuming they get normal/adequate medical care.
+        </div>
+        <div>
           <span className="deemphasized">(Update: an earlier version of this article made a distinction between case fatality rate and mortality rate, but failed to define the terms correctly. Collapsing this distinction and using the term "fatality rate" instead.)</span>
         </div>
-        {/*<div>*/}
-        {/*  (This is a good time to remind ourselves of how serious this is. Many people have already died from COVID-19, and many more will die unless we take dramatic action.)*/}
-        {/*</div>*/}
         <div>
           The fatality rate for COVID-19 has been estimated between 1 percent and <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 percent</a>. It might turn out to be lower than 1 percent, if there are a lot of undiagnosed cases. It's definitely higher when the medical system is overburdened (more on that in a minute).
         </div>
