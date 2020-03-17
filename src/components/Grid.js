@@ -27,6 +27,8 @@ type Props = {
   daysIncubating?: number,
   daysSymptomatic?: number,
   deathRate?: number,
+  decreaseInEncountersAfterSymptoms?: number,
+  chanceOfIsolationAfterSymptoms?: number,
   hospitalCapacityPct?: number,
   immunityFraction?: number,
   maxActiveNodes?: number,
@@ -49,6 +51,8 @@ type Props = {
   showDaysPerStateControls?: boolean,
   showDeaths?: boolean,
   showDeathRateSlider?: boolean,
+  showDecreaseInEncountersAfterSymptomsSlider?: boolean,
+  showChanceOfIsolationAfterSymptomsSlider?: boolean,
   showDegreeSlider?: boolean,
   showHospitalCapacitySlider?: boolean,
   showImmunityFractionSlider?: boolean,
@@ -73,6 +77,8 @@ type State = {
   daysIncubating: number,
   daysSymptomatic: number,
   deathRate: number,
+  decreaseInEncountersAfterSymptoms: number,
+  chanceOfIsolationAfterSymptoms: number,
   hospitalCapacityPct: number,
   immunityFraction: number,
   longDistaceNetworkActive: boolean,
@@ -119,6 +125,8 @@ export default class Grid extends Component<Props, State> {
     daysIncubating: 7,
     daysSymptomatic: 8,
     deathRate: 0.03,
+    decreaseInEncountersAfterSymptoms: 0.5,
+    chanceOfIsolationAfterSymptoms: 0,
     hospitalCapacityPct: -1,
     immunityFraction: 0,
     maxIterations: -1,
@@ -138,6 +146,8 @@ export default class Grid extends Component<Props, State> {
     showAllControls: false,
     showDaysPerStateControls: false,
     showDeaths: false,
+    showDecreaseInEncountersAfterSymptomsSlider: false,
+    showChanceOfIsolationAfterSymptomsSlider: false,
     showDeathRateSlider: false,
     showDegreeSlider: false,
     showHospitalCapacitySlider: false,
@@ -222,6 +232,8 @@ export default class Grid extends Component<Props, State> {
       daysIncubating: props.daysIncubating,
       daysSymptomatic: props.daysSymptomatic,
       deathRate: props.deathRate,
+      decreaseInEncountersAfterSymptoms: props.decreaseInEncountersAfterSymptoms,
+      chanceOfIsolationAfterSymptoms: props.chanceOfIsolationAfterSymptoms,
       hospitalCapacityPct: props.hospitalCapacityPct,
       immunityFraction: props.immunityFraction,
       longDistaceNetworkActive: props.addLinkedNodes,
@@ -555,9 +567,15 @@ export default class Grid extends Component<Props, State> {
   // noinspection JSUnusedLocalSymbols
   getNeighbors(node: GridNode, r: number, c: number, linkedNodes: Set<GridNode>): GridNode[] {
     let neighbors = [];
+    let personHoursWithIsolation = this.state.personHours;
+    if (node.isInfected) {
+      if (this.rng.random() < this.state.chanceOfIsolationAfterSymptoms) {
+        personHoursWithIsolation *= (1-this.state.decreaseInEncountersAfterSymptoms);        
+      }
+    }
     if (this.state.travelRadius === 0) {
       // do nothing, just return empty list
-    } else if (this.state.travelRadius === 1 && this.state.personHours === 4) {
+    } else if (this.state.travelRadius === 1 && personHoursWithIsolation === 4) {
       // Just the four cardinal neighbors
       if (r > 0) {
         neighbors.push(this.grid[r-1][c]);
@@ -573,7 +591,7 @@ export default class Grid extends Component<Props, State> {
       }
     } else {
       // Regular probabilistic neighbors
-      while (neighbors.length < this.state.personHours) {
+      while (neighbors.length < personHoursWithIsolation) {
         let n = this.chooseRandomNeighbor(node, r, c)
         neighbors.push(n)
       }
@@ -849,6 +867,22 @@ export default class Grid extends Component<Props, State> {
               1, 20, 1, false, false);
     }
 
+    let chanceOfIsolationAfterSymptomsSlider = null;
+    if (showAll || this.props.showChanceOfIsolationAfterSymptomsSlider) {
+      chanceOfIsolationAfterSymptomsSlider =
+          this.renderSlider("Chance of isolation after showing symptoms", this.state.chanceOfIsolationAfterSymptoms,
+              (e, value) => { this.setState({chanceOfIsolationAfterSymptoms: value}); },
+              0, 1, 0.01, true, false);
+    }
+
+    let decreaseInEncountersAfterSymptomsSlider = null;
+    if (showAll || this.props.showDecreaseInEncountersAfterSymptomsSlider) {
+      decreaseInEncountersAfterSymptomsSlider =
+          this.renderSlider("Degree of isolation after showing symptoms", this.state.decreaseInEncountersAfterSymptoms,
+              (e, value) => { this.setState({decreaseInEncountersAfterSymptoms: value}); },
+              0, 1, 0.01, true, false);
+    }
+
     let deathRateSlider = null;
     if (showAll || this.props.showDeathRateSlider) {
       let sliderName = "Fatality rate";
@@ -968,6 +1002,8 @@ export default class Grid extends Component<Props, State> {
 
           {hospitalCapacitySlider}
           {deathRateSlider}
+          {chanceOfIsolationAfterSymptomsSlider}
+          {decreaseInEncountersAfterSymptomsSlider}
 
           {personHoursSlider}
           {travelRadiusSlider}
