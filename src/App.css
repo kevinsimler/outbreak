@@ -278,6 +278,14 @@ CODE {
   color: #AAA;
 }
 
+.translations {
+  color: #AAA;
+}
+
+.translations A {
+  color: #AAA;
+}
+
 
 .plot-container {
   margin-top: 1.0em;

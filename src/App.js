@@ -49,6 +49,9 @@ class App extends Component<Props, State> {
           <h5 className="author">by Kevin Simler<br/>March 16, 2020</h5>
         </div>
         <div>
+          <span className="translations"><a href="https://www.podemosaprender.org/brote/">en Español</a></span>
+        </div>
+        <div>
           <a href="https://twitter.com/Harry_Stevens">Harry Stevens</a> at The Washington Post recently published a <em>very</em> elegant simulation of how a disease like COVID-19 spreads. If you haven't already, I highly recommend <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">checking it out</a>.
         </div>
         <div>
