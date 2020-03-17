@@ -278,12 +278,12 @@ CODE {
   color: #AAA;
 }
 
-.translations {
-  color: #AAA;
+.deemphasized {
+  color: #999;
 }
 
-.translations A {
-  color: #AAA;
+.deemphasized A {
+  color: #999;
 }
 
 

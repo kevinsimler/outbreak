@@ -851,9 +851,9 @@ export default class Grid extends Component<Props, State> {
 
     let deathRateSlider = null;
     if (showAll || this.props.showDeathRateSlider) {
-      let sliderName = "Mortality rate";
+      let sliderName = "Fatality rate";
       if (this.state.hospitalCapacityPct > -1) {
-        sliderName = "Input mortality rate";
+        sliderName = "Input fatality rate";
       }
 
       deathRateSlider =

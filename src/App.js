@@ -49,7 +49,7 @@ class App extends Component<Props, State> {
           <h5 className="author">by Kevin Simler<br/>March 16, 2020</h5>
         </div>
         <div>
-          <span className="translations"><a href="https://www.podemosaprender.org/brote/">en Español</a></span>
+          <span className="deemphasized"><a href="https://www.podemosaprender.org/brote/">en Español</a></span>
         </div>
         <div>
           <a href="https://twitter.com/Harry_Stevens">Harry Stevens</a> at The Washington Post recently published a <em>very</em> elegant simulation of how a disease like COVID-19 spreads. If you haven't already, I highly recommend <a href="https://www.washingtonpost.com/graphics/2020/world/corona-simulator/">checking it out</a>.
@@ -409,19 +409,19 @@ class App extends Component<Props, State> {
           Not every patient recovers from a disease. Many end up {dead}.
         </div>
         <div>
-          Enter the <strong>mortality rate</strong>.
+          Enter the <strong>fatality rate</strong>.
         </div>
         <div>
-          (You may have heard about "case fatality rate" in the context of COVID-19. This is not the same as mortality rate. "Case fatality rate" <a href="https://www.britannica.com/science/case-fatality-rate">is defined</a> as the number of recorded deaths divided by the number of confirmed cases, when both measures are taken at the same point in time. Whereas "mortality rate" is defined as the likelihood of eventually dying from a disease once you contract it. CFR is an important number for understanding a disease as we're learning about it. But the ultimate number we care about is the morality rate — for our own and our loved ones' chances of survival.)
+          <span className="deemphasized">(Update: an earlier version of this article made a distinction between case fatality rate and mortality rate, but failed to define the terms correctly. Collapsing this distinction and using the term "fatality rate" instead.)</span>
         </div>
         {/*<div>*/}
         {/*  (This is a good time to remind ourselves of how serious this is. Many people have already died from COVID-19, and many more will die unless we take dramatic action.)*/}
         {/*</div>*/}
         <div>
-          The mortality rate for COVID-19 has been estimated between 1 percent and <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 percent</a>. It might turn out to be lower than 1 percent, if there are a lot of undiagnosed cases. It's definitely higher when the medical system is overburdened (more on that in a minute).
+          The fatality rate for COVID-19 has been estimated between 1 percent and <a href="https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext">6 percent</a>. It might turn out to be lower than 1 percent, if there are a lot of undiagnosed cases. It's definitely higher when the medical system is overburdened (more on that in a minute).
         </div>
         <div>
-          We'll start at a 3 percent mortality rate for our disease model, but you can vary the parameter below:
+          We'll start at a 3 percent fatality rate for our disease model, but you can vary the parameter below:
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -467,10 +467,10 @@ class App extends Component<Props, State> {
           In our disease model, here's how the medical system breaks:
         </div>
         <div>
-          <strong>When there are more infections than hospital capacity, the mortality rate <em>doubles</em>.</strong>
+          <strong>When there are more infections than hospital capacity, the fatality rate <em>doubles</em>.</strong>
         </div>
         <div>
-          Give it a try. Pay special attention to the <em>input mortality rate</em> (the value on the slider), which defines how often people die even in the best circumstances, vs. the <em>actual death rate</em> (highlighted below the chart), which tells us how the system behaves under strain.
+          Give it a try. Pay special attention to the <em>input fatality rate</em> (the value on the slider), which defines how often people die even in the best circumstances, vs. the <em>actual death rate</em> (highlighted below the chart), which tells us how the system behaves under strain.
         </div>
         <Figure>
           <Grid gridRows={101}
@@ -502,7 +502,7 @@ class App extends Component<Props, State> {
           This is your final test today.
         </div>
         <div>
-          The input mortality rate is fixed at 3 percent. Hospital capacity is fixed at 5 percent.
+          The input fatality rate is fixed at 3 percent. Hospital capacity is fixed at 5 percent.
         </div>
         <div>
           Play out the simulation and note the actual death rate: 6 percent. Then try to bring that number down.
