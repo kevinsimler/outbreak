@@ -1,5 +1,7 @@
 A playable disease simulator.
 
+Apologies that the code is not better organized and commented. I threw this together at the last minute =/.
+
 Here's how I compile and deploy:
 
 ```
