@@ -403,6 +403,41 @@ class App extends Component<Props, State> {
           In my understanding (again, not an expert), this is the single most important lever we have for fighting this thing.
         </div>
         <div>
+          <h3>Chance of self-isolation/quarantine after exhibiting symptoms</h3>
+        </div>
+        <div>
+          In the simulation below, you can vary the <strong>likelihood of someone self-isolating after exhibiting symptoms</strong>. Additionally, you can vary how strict they are with that self-isolation
+        </div>
+        <div>
+          Let's start the chance of isolation at 50% and the amount of isolation at 50%. What are the minimum values we need to keep the outbreak contained?
+        </div>
+        <Figure>
+          <Grid degree={24}
+                gridRows={51}
+                gridCols={51}
+                personHours={20}
+                nodeSize={10}
+                nug={5}
+                randomSeed={100}
+                showAliveFraction={true}
+                showInteractions={true}
+                showPersonHoursSlider={true}
+                showTransmissionProbabilitySlider={true}
+                showChanceOfIsolationAfterSymptomsSlider={true}
+                showDecreaseInEncountersAfterSymptomsSlider={true}
+                showTravelRadiusSlider={true}
+                speed={0.8}
+                transmissionProbability={0.3}
+                travelRadius={10}
+          />
+        </Figure>
+        <div>
+          As you can see, as people begin to exhibit symptoms, if they voluntarily self-isolate and do a good job of that isolation, the spread can be mitigated fairly well. Unfortunately, if less than half the population self-isolates, the effects are fairly minimal.
+        </div>
+        <div>
+          Hint: try setting the chance of isolation to various levels above 50% and try various levels of self-isolation to see how the curve flattens immensely for high values
+        </div>
+        <div>
           <h3>Death</h3>
         </div>
         <div>
