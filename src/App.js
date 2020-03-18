@@ -625,7 +625,7 @@ class App extends Component<Props, State> {
           <h3>Self-quarantine</h3>
         </div>
         <div>
-          (Thanks to Jason Legate for coding this addition to the disease model.)
+          (Thanks to <a href="https://twitter.com/jasonlegate">Jason Legate</a> for suggesting and coding this addition to the disease model.)
         </div>
         <div>
           In the simulation below, you can vary the <strong>self-quarantine rate</strong>, i.e., the chance that a patient will choose to isolate themselves once they become symptomatic. Patients who become {selfQuarantined} will be drawn in blue instead of red.
