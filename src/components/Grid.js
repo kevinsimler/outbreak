@@ -477,6 +477,10 @@ export default class Grid extends Component<Props, State> {
         }
       }
     }
+    let chanceOfIsolationAfterSymptoms = this.state.chanceOfIsolationAfterSymptoms;
+    if (!this.props.showChanceOfIsolationAfterSymptomsSlider) {
+      chanceOfIsolationAfterSymptoms = 0;
+    }
     let overCapacity = this.state.hospitalCapacityPct > -1 && actualInfectedNodes > this.state.hospitalCapacityPct * (nRows*nCols);
     for (let r = 0; r < nRows; r++) {
       for (let c = 0; c < nCols; c++) {
@@ -486,7 +490,7 @@ export default class Grid extends Component<Props, State> {
             this.state.daysSymptomatic,
             this.props.showDeaths,
             this.state.deathRate,
-            this.state.chanceOfIsolationAfterSymptoms);
+            chanceOfIsolationAfterSymptoms);
       }
     }
     let actualDeadNodes = 0;
