@@ -15,6 +15,8 @@ export class GridNode {
   specialDegree: number|null;
   dead: boolean;
 
+  isolating: boolean;
+
   rng: RNG;
 
   constructor(rng: RNG, r: number, c: number) {
@@ -29,6 +31,8 @@ export class GridNode {
     this.mediaOutlet = false;
     this.specialDegree = null;
     this.dead = false;
+
+    this.isolating = false;
 
     this.rng = rng;
   }
@@ -101,6 +105,10 @@ export class GridNode {
     this.nextState = this.state
   }
 
+  isIsolating(): boolean {
+    return this.isolating;
+  }
+
   tryToInfect(neighbor: GridNode, transProb: number) {
     if (!neighbor.isSusceptible()) {
       // Can't get infected
@@ -117,10 +125,22 @@ export class GridNode {
     }
   }
 
-  endDay(overHospitalCapacity: boolean, daysIncubating: number, daysSymptomatic: number, allowDeaths: boolean, deathRate: number) {
+  maybeIsolate(chanceOfIsolationAfterSymptoms: number) {
+    if (this.rng.random() < chanceOfIsolationAfterSymptoms) {
+      this.isolating = true;
+    }
+  }
+
+  endDay(overHospitalCapacity: boolean,
+         daysIncubating: number,
+         daysSymptomatic: number,
+         allowDeaths: boolean,
+         deathRate: number,
+         chanceOfIsolationAfterSymptoms: number) {
     if (this.nextState !== this.state) {
       if (this.nextState === Constants.EXPOSED && daysIncubating === 0) {
         this.nextState = Constants.INFECTED;
+        this.maybeIsolate(chanceOfIsolationAfterSymptoms);
       }
 
       this._setState(this.nextState);
@@ -131,6 +151,7 @@ export class GridNode {
       if (this.isExposed()) {
         if (this.daysInState >= daysIncubating) {
           this.setInfected();
+          this.maybeIsolate(chanceOfIsolationAfterSymptoms);
           this.daysInState = 0;
         }
       } else if (this.isInfected()) {

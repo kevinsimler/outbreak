@@ -125,8 +125,8 @@ export default class Grid extends Component<Props, State> {
     daysIncubating: 7,
     daysSymptomatic: 8,
     deathRate: 0.03,
-    decreaseInEncountersAfterSymptoms: 0.5,
-    chanceOfIsolationAfterSymptoms: 0,
+    decreaseInEncountersAfterSymptoms: 0.25,
+    chanceOfIsolationAfterSymptoms: 0.25,
     hospitalCapacityPct: -1,
     immunityFraction: 0,
     maxIterations: -1,
@@ -481,7 +481,12 @@ export default class Grid extends Component<Props, State> {
     for (let r = 0; r < nRows; r++) {
       for (let c = 0; c < nCols; c++) {
         let node = this.grid[r][c];
-        node.endDay(overCapacity, this.state.daysIncubating, this.state.daysSymptomatic, this.props.showDeaths, this.state.deathRate);
+        node.endDay(overCapacity,
+            this.state.daysIncubating,
+            this.state.daysSymptomatic,
+            this.props.showDeaths,
+            this.state.deathRate,
+            this.state.chanceOfIsolationAfterSymptoms);
       }
     }
     let actualDeadNodes = 0;
@@ -567,15 +572,15 @@ export default class Grid extends Component<Props, State> {
   // noinspection JSUnusedLocalSymbols
   getNeighbors(node: GridNode, r: number, c: number, linkedNodes: Set<GridNode>): GridNode[] {
     let neighbors = [];
-    let personHoursWithIsolation = this.state.personHours;
-    if (node.isInfected) {
-      if (this.rng.random() < this.state.chanceOfIsolationAfterSymptoms) {
-        personHoursWithIsolation *= (1-this.state.decreaseInEncountersAfterSymptoms);        
-      }
+    let personHours = this.state.personHours;
+    if (node.isIsolating()) {
+      // if (this.rng.random() < this.state.chanceOfIsolationAfterSymptoms) {
+      personHours *= (1-this.state.decreaseInEncountersAfterSymptoms);
+      // }
     }
     if (this.state.travelRadius === 0) {
       // do nothing, just return empty list
-    } else if (this.state.travelRadius === 1 && personHoursWithIsolation === 4) {
+    } else if (this.state.travelRadius === 1 && personHours === 4) {
       // Just the four cardinal neighbors
       if (r > 0) {
         neighbors.push(this.grid[r-1][c]);
@@ -591,7 +596,7 @@ export default class Grid extends Component<Props, State> {
       }
     } else {
       // Regular probabilistic neighbors
-      while (neighbors.length < personHoursWithIsolation) {
+      while (neighbors.length < personHours) {
         let n = this.chooseRandomNeighbor(node, r, c)
         neighbors.push(n)
       }
@@ -621,7 +626,6 @@ export default class Grid extends Component<Props, State> {
 
     // actually redraw iff any of the drawing parameters have changed
     let currentDrawingParams = [
-        this.network,
         this.state.drawNodeOutlines,
         this.state.longDistaceNetworkActive,
         this.state.personHours,
@@ -696,7 +700,11 @@ export default class Grid extends Component<Props, State> {
     if (node.isExposed()) {
       context.fillStyle = Constants.EXPOSED_COLOR;
     } else if (node.isInfected()) {
-      context.fillStyle = Constants.INFECTED_COLOR;
+      if (node.isIsolating()) {
+        context.fillStyle = Constants.ISOLATING_COLOR;
+      } else {
+        context.fillStyle = Constants.INFECTED_COLOR;
+      }
     } else if (node.isRemoved()) {
       context.fillStyle = Constants.REMOVED_COLOR;
     } else if (node.isDead()) {
@@ -740,8 +748,11 @@ export default class Grid extends Component<Props, State> {
         top = 0.5;
         hei = hei - 1;
       }
+      // if (node.isIsolating()) {
+      //   context.strokeRect(left+1, top+1, wid-2, hei-2);
+      // } else {
       context.strokeRect(left, top, wid, hei);
-      // context.stroke();
+      // }
     }
   }
 
@@ -870,7 +881,7 @@ export default class Grid extends Component<Props, State> {
     let chanceOfIsolationAfterSymptomsSlider = null;
     if (showAll || this.props.showChanceOfIsolationAfterSymptomsSlider) {
       chanceOfIsolationAfterSymptomsSlider =
-          this.renderSlider("Chance of isolation after showing symptoms", this.state.chanceOfIsolationAfterSymptoms,
+          this.renderSlider("Self-quarantine rate", this.state.chanceOfIsolationAfterSymptoms,
               (e, value) => { this.setState({chanceOfIsolationAfterSymptoms: value}); },
               0, 1, 0.01, true, false);
     }
@@ -878,7 +889,7 @@ export default class Grid extends Component<Props, State> {
     let decreaseInEncountersAfterSymptomsSlider = null;
     if (showAll || this.props.showDecreaseInEncountersAfterSymptomsSlider) {
       decreaseInEncountersAfterSymptomsSlider =
-          this.renderSlider("Degree of isolation after showing symptoms", this.state.decreaseInEncountersAfterSymptoms,
+          this.renderSlider("Self-quarantine strictness", this.state.decreaseInEncountersAfterSymptoms,
               (e, value) => { this.setState({decreaseInEncountersAfterSymptoms: value}); },
               0, 1, 0.01, true, false);
     }

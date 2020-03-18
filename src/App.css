@@ -273,6 +273,10 @@ CODE {
   color: #fff;
 }
 
+.code-quarantined {
+  background-color: #b5c9e6;
+}
+
 
 .author {
   color: #AAA;
