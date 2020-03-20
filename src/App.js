@@ -677,6 +677,8 @@ class App extends Component<Props, State> {
                 showAllControls={true}
                 // showDaysPerStateControls={true}
                 showDeaths={true}
+                showTransmissionProbabilitySlider={true}
+                showChanceOfIsolationAfterSymptomsSlider={true}
                 // showPersonHoursSlider={true}
                 // showTransmissionProbabilitySlider={true}
                 // showTravelRadiusSlider={true}
